@@ -118,8 +118,8 @@
           <div class="column has-text-centered">
             <div class="publication-links">
               <!-- PDF Link. -->
-              <!-- <span class="link-block">
-                <a href="https://arxiv.org/pdf/2011.12948"
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2406.17840"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -127,7 +127,7 @@
                   <span>Paper</span>
                 </a>
               </span>
-              <span class="link-block">
+              <!-- <span class="link-block">
                 <a href="https://arxiv.org/abs/2011.12948"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -138,12 +138,12 @@
               </span> -->
               <!-- Video Link. -->
               <span class="link-block">
-                <a 
+                <a href="https://www.youtube.com/watch?v=ztTsMeIgIGk"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-youtube"></i>
                   </span>
-                  <span>Video (Coming Soon)</span>
+                  <span>Video</span>
                 </a>
               </span>
               <!-- Code Link. -->
@@ -178,7 +178,7 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <video id="teaser" autoplay muted loop playsinline height="100%">
-        <source src="./static/videos/workspace_2.mp4"
+        <source src="./static/videos/workspace_2x.mp4"
                 type="video/mp4">
       </video>
       <h2 class="subtitle has-text-centered">
@@ -265,15 +265,15 @@
     <!--/ Abstract. -->
 
     <!-- Paper video. -->
-    <!-- <div class="columns is-centered has-text-centered">
+    <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Video</h2>
         <div class="publication-video">
-          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+          <iframe src="https://www.youtube.com/watch?v=ztTsMeIgIGk?rel=0&amp;showinfo=0"
                   frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
       </div>
-    </div> -->
+    </div>
     <!--/ Paper video. -->
 
   </div>
@@ -288,10 +288,12 @@
       <h2 class="title is-3">Method Overview</h2>
 
           <div >
-            <img src="./static/images/1_system_overview_new.png"
+            <img src="./static/images/1_system_overview_v6.png"
                  alt="Interpolate start reference image."
                  width="100%"/>
-            <p> Our system takes the initial scene layout and human-level instruction as input, and uses a high-level planner to obtain the target scene layout and a detailed task plan. The low-level motion generator then generates synchronized object motion, full-body human motion and finger motion.</p>
+            <p> 
+              Our system takes the scene description and human-level instruction as input and uses a high-level planner to obtain the scene map and a detailed execution plan. The low-level motion generator then generates synchronized object motion, full-body human motion, and finger motion. Finally, the physics tracker uses RL to track the generated motion, producing physically plausible motion.
+            </p>
           </div>
 
         <br/>
@@ -309,11 +311,12 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column is-full-width">
-          <h2 class="title is-3">Comparison</h2>
+          <h2 class="title is-3">Evaluations of Motion Generator</h2>
           <div class="content">
             <p>
-              Our model generates realistic finger
-              movements, ensuring more accurate contact and less penetration.
+              We compare our low-level motion generator with the baseline: CNet+GRIP.
+              While the baseline fails to produce precise hand and finger motions,
+              our method successfully generates accurate hand-object interactions.
             </p>
           </div>
         </div>
@@ -321,20 +324,13 @@
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item item-steve">
           <video poster="" id="steve" autoplay controls muted loop height="100%">
-            <source src="./static/videos/hand1.mp4"
+            <source src="./static/videos/grip_1.mov"
                     type="video/mp4">
           </video>
         </div>
         <div class="item item-chair-tp">
           <video poster="" id="chair-tp" autoplay controls muted loop height="100%">
-            <source src="./static/videos/hand2.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-
-        <div class="item item-blueshirt">
-          <video poster="" id="blueshirt" autoplay controls muted loop height="100%">
-            <source src="./static/videos/hand3.mp4"
+            <source src="./static/videos/grip_2.mov"
                     type="video/mp4">
           </video>
         </div>
@@ -345,6 +341,79 @@
 </section>
 
 <section class="hero teaser">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Ablation Studies on Motion Generator</h2>
+          <div class="content">
+            <p>
+              We compare our full system with two ablations: CNet and C+RNet.
+              Our full system generates natural finger movements,
+              making the interaction much more realistic,
+              while the ablations fail to produce finger movements
+              and exhibit severe artifacts.
+              For further details on the ablations, please refer to our paper.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop height="100%">
+            <source src="./static/videos/ablations_1.mov"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop height="100%">
+            <source src="./static/videos/ablations_2.mov"
+                    type="video/mp4">
+          </video>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Evaluations of Physics Tracker</h2>
+          <div class="content">
+            <p>
+              We compare the kinematic motion generated by the motion generator
+              with the motion tracked by the physics tracker.
+              Our results demonstrate that the physics tracker
+              effectively corrects artifacts in the kinematic motion,
+              such as foot floating and hand object penetration.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop height="100%">
+            <source src="./static/videos/physics_1.mov"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop height="100%">
+            <source src="./static/videos/physics_2.mov"
+                    type="video/mp4">
+          </video>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="hero teaser">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
@@ -383,9 +452,9 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
-<section class="hero teaser">
+<!-- <section class="hero teaser">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
@@ -415,7 +484,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <section class="hero teaser">
   <div class="hero-body">
@@ -428,27 +497,27 @@
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item item-steve">
           <video poster="" id="steve" autoplay controls muted loop height="100%">
-            <source src="./static/videos/stackbox.mp4"
+            <source src="./static/videos/yoga.mov"
                     type="video/mp4">
           </video>
         </div>
         <div class="item item-chair-tp">
           <video poster="" id="chair-tp" autoplay controls muted loop height="100%">
-            <source src="./static/videos/christmas.mp4"
+            <source src="./static/videos/christmas.mov"
                     type="video/mp4">
           </video>
         </div>
 
         <div class="item item-blueshirt">
           <video poster="" id="blueshirt" autoplay controls muted loop height="100%">
-            <source src="./static/videos/yoga.mp4"
+            <source src="./static/videos/stackbox.mov"
                     type="video/mp4">
           </video>
         </div>
 
         <div class="item item-blueshirt">
           <video poster="" id="blueshirt" autoplay controls muted loop height="100%">
-            <source src="./static/videos/vase.mp4"
+            <source src="./static/videos/vase.mov"
                     type="video/mp4">
           </video>
         </div>
